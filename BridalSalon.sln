@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BridalSalon", "BridalSalon\BridalSalon.csproj", "{56E24E1F-11C4-40C0-9FDD-AA81976C8F77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BridalSalon", "BridalSalon\BridalSalon.csproj", "{56E24E1F-11C4-40C0-9FDD-AA81976C8F77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bridal.Core", "Bridal.Core\Bridal.Core.csproj", "{A6701D40-A86A-48D9-BFFD-447C3B45C124}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bridal.Data", "Bridal.Data\Bridal.Data.csproj", "{6A40DDDA-9DEF-4E16-A5B7-4ED0D871D09F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bridal.Service", "Bridal.Service\Bridal.Service.csproj", "{DAAB99AE-821F-42C1-84C8-AB17B78AC75B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{56E24E1F-11C4-40C0-9FDD-AA81976C8F77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56E24E1F-11C4-40C0-9FDD-AA81976C8F77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56E24E1F-11C4-40C0-9FDD-AA81976C8F77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6701D40-A86A-48D9-BFFD-447C3B45C124}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6701D40-A86A-48D9-BFFD-447C3B45C124}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6701D40-A86A-48D9-BFFD-447C3B45C124}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6701D40-A86A-48D9-BFFD-447C3B45C124}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A40DDDA-9DEF-4E16-A5B7-4ED0D871D09F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A40DDDA-9DEF-4E16-A5B7-4ED0D871D09F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A40DDDA-9DEF-4E16-A5B7-4ED0D871D09F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A40DDDA-9DEF-4E16-A5B7-4ED0D871D09F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAAB99AE-821F-42C1-84C8-AB17B78AC75B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAAB99AE-821F-42C1-84C8-AB17B78AC75B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAAB99AE-821F-42C1-84C8-AB17B78AC75B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAAB99AE-821F-42C1-84C8-AB17B78AC75B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

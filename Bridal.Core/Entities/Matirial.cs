@@ -1,4 +1,4 @@
-﻿namespace BridalSalon.Entities
+﻿namespace Bridal.Core.Entities
 {
     public class Matirial
     {

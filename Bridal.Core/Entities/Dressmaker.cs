@@ -1,4 +1,4 @@
-﻿namespace BridalSalon.Entities
+﻿namespace Bridal.Core.Entities
 {
     public enum Experience { beginner=1,middle=2,expert=3 }
     public class Dressmaker
