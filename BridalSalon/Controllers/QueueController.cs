@@ -1,4 +1,6 @@
-﻿using BridalSalon.Entities;
+﻿using Bridal.Core.Entities;
+using Bridal.Core.Services;
+using Bridal.Service;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
 
@@ -10,20 +12,30 @@ namespace BridalSalon.Controllers
     [ApiController]
     public class QueueController : ControllerBase
     {
-        private static List<QueueBridal> queues = new List<QueueBridal>();
-        private static int counter = 1;
+        private readonly IQueueBridalService _queueBridalService;
+
+        public QueueController(IQueueBridalService queueBridalService)
+        {
+            _queueBridalService = queueBridalService;
+        }
+
+
+        //private static int counter = 1;
         // GET: api/<QueueController>
         [HttpGet]
-        public IEnumerable<QueueBridal> Get()
+        public IActionResult Get()
         {
-            return queues;
+            return Ok(_queueBridalService.GetQueueBridal());
         }
 
         // GET api/<QueueController>/5
         [HttpGet("{id}")]
-        public QueueBridal Get(int id)
+        public IActionResult Get(int id)
         {
-            return queues.Find(q=>q.Id==id);
+            var queue = _queueBridalService.GetById(id);
+            if (queue is null)
+                return NotFound();
+            return Ok(queue);
         }
         //[HttpGet("{id}/date")]
         //public QueueBridal Get(int id,DateTime date)
@@ -35,33 +47,27 @@ namespace BridalSalon.Controllers
         [HttpPost]
         public void Post([FromBody] QueueBridal value)
         {
-            value.Id = ++counter;
-            queues.Add(value);
+            //value.Id = ++counter;
+            _queueBridalService.AddQueueBridal(value);
         }
 
         // PUT api/<QueueController>/5
         [HttpPut("{id}/date")]
         public void Put(int id, [FromBody] DateTime value)
         {
-            QueueBridal queueBridal = queues.Find(q => q.Id == id);
-            if (queueBridal != null)
-                queueBridal.DateQueue = value;
+            _queueBridalService.UpdateQueueBridal(id, value);
         }
         [HttpPut("{id}/bridal")]
-        public void Put(int id, [FromBody] Bridal value)
+        public void Put(int id, [FromBody] BridalClass value)
         {
-            QueueBridal queueBridal = queues.Find(q => q.Id == id);
-            if (queueBridal != null)
-                queueBridal.bridal = value;
+            _queueBridalService.UpdateQueueBridal(id, value);
         }
 
         // DELETE api/<QueueController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            QueueBridal queueBridal=queues.Find(q=>q.Id==id);
-            if(queueBridal!=null)
-                queues.Remove(queueBridal);
+            _queueBridalService.DeleteQueueBridal(id);
         }
     }
 }

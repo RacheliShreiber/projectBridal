@@ -1,4 +1,5 @@
-﻿using BridalSalon.Entities;
+﻿using Bridal.Core.Entities;
+using Bridal.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics.Metrics;
 
@@ -10,20 +11,28 @@ namespace BridalSalon.Controllers
     [ApiController]
     public class DressmakerController : ControllerBase
     {
-        private static List<Dressmaker> dressmakers = new List<Dressmaker>();
-        private static int counter = 100;
+        private readonly IDressmakerService _dressmakerService;
+        //private static int counter = 100;
         // GET: api/<DressmakerController>
-        [HttpGet]
-        public IEnumerable<Dressmaker> Get()
+
+        public DressmakerController(IDressmakerService dressmakerService)
         {
-            return dressmakers;
+            _dressmakerService = dressmakerService;
+        }
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(_dressmakerService.GetDressmaker());
         }
 
         // GET api/<DressmakerController>/5
         [HttpGet("{id}")]
-        public Dressmaker Get(int id)
+        public IActionResult Get(int id)
         {
-            return dressmakers.Find(d=>d.Id==id);
+            var dressmaker = _dressmakerService.GetById(id);
+            if(dressmaker is null)
+                return NotFound();
+            return Ok(dressmaker);
         }
         //[HttpGet("{id}/bridals")]
         //public List<Bridal> Get(int id)
@@ -35,33 +44,27 @@ namespace BridalSalon.Controllers
         [HttpPost]
         public void Post([FromBody] Dressmaker value)
         {
-            value.Id = counter;
-            counter += 100;
-            value.status = 1;
-            dressmakers.Add(value);
+            //value.Id = counter;
+            //counter += 100;
+            //value.status = 1;
+            _dressmakerService.AddDressmaker(value);
         }
 
         // PUT api/<DressmakerController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] Dressmaker value)
         {
-            Dressmaker dressmaker=dressmakers.Find(d=>d.Id==id);
-            if(dressmaker!=null)
-                dressmaker.Name=value.Name;
+            _dressmakerService.UpdateDressmaker(id, value);
         }
         [HttpPut("{id}/experience")]
         public void Put(int id, [FromBody] Experience value)
         {
-            Dressmaker dressmaker = dressmakers.Find(d => d.Id == id);
-            if (dressmaker != null)
-                dressmaker.experience = value;
+            _dressmakerService.UpdateDressmaker(id, value);
         }
         [HttpPut("{id}/status")]
         public void Put(int id,int status)
         {
-            Dressmaker dressmaker = dressmakers.Find(d => d.Id == id);
-            if (dressmaker != null)
-                dressmaker.status =status;
+            _dressmakerService.UpdateDressmaker(id, status);
         }
 
         // DELETE api/<DressmakerController>/5

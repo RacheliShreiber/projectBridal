@@ -1,9 +1,15 @@
-﻿namespace Bridal.Core.Entities
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Bridal.Core.Entities
 {
     public class QueueBridal
     {
         public int Id { get; set; }
-        public Bridal bridal { get; set; }
+        public BridalClass Bridal { get; set; }
         public DateTime DateQueue { get; set; }
     }
 }
