@@ -19,17 +19,17 @@ namespace Bridal.Data.Repositories
             _context = context;
         }
 
-        public QueueBridal AddQueueBridal(QueueBridal queueBridal)
+        public async Task<QueueBridal> AddQueueBridalAsync(QueueBridal queueBridal)
         {
             _context.QueueBridalList.Add(queueBridal);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return queueBridal;
         }
 
-        public void DeleteQueueBridal(int id)
+        public async Task DeleteQueueBridalAsync(int id)
         {
             _context.QueueBridalList.Remove(GetById(id));
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public QueueBridal GetById(int id)
@@ -42,21 +42,21 @@ namespace Bridal.Data.Repositories
             return _context.QueueBridalList.Include(q=>q.Bridal);
         }
 
-        public QueueBridal UpdateQueueBridal(int id, BridalClass bridal)
+        public async Task<QueueBridal> UpdateQueueBridalAsync(int id, BridalClass bridal)
         {
             var queueBridal = _context.QueueBridalList.Find(id);
             if (queueBridal != null)
                 queueBridal.Bridal = bridal;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return queueBridal;
         }
 
-        public QueueBridal UpdateQueueBridal(int id, DateTime value)
+        public async Task<QueueBridal> UpdateQueueBridalAsync(int id, DateTime value)
         {
             var queueBridal = _context.QueueBridalList.Find(id);
             if (queueBridal != null)
                 queueBridal.DateQueue = value;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return queueBridal;
         }
     }

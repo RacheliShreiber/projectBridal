@@ -13,13 +13,13 @@ namespace Bridal.Core.Repositories
 
         BridalClass GetById(int id);
 
-        BridalClass AddBridal(BridalClass bridal);
+        Task<BridalClass> AddBridalAsync(BridalClass bridal);
 
-        BridalClass UpdateBridal(int id, BridalClass bridal);
-        BridalClass UpdateBridal(int id,DateTime value);
-        BridalClass UpdateBridal(int id,Dressmaker value);
+        Task<BridalClass> UpdateBridalAsync(int id, BridalClass bridal);
+        Task<BridalClass> UpdateBridalAsync(int id,DateTime value);
+        //BridalClass UpdateBridal(int id,Dressmaker value);
 
-        void DeleteBridal(int id);
+        Task DeleteBridalAsync(int id);
 
         
     }

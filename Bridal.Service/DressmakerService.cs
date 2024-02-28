@@ -18,9 +18,9 @@ namespace Bridal.Service
             _dressmakerRepository = dressmakerRepository;
         }
 
-        public Dressmaker AddDressmaker(Dressmaker dressmaker)
+        public async Task<Dressmaker> AddDressmakerAsync(Dressmaker dressmaker)
         {
-            return _dressmakerRepository.AddDressmaker(dressmaker); 
+            return await _dressmakerRepository.AddDressmakerAsync(dressmaker); 
         }
 
         public Dressmaker GetById(int id)
@@ -33,19 +33,19 @@ namespace Bridal.Service
             return _dressmakerRepository.GetDressmaker();
         }
 
-        public Dressmaker UpdateDressmaker(int id, Dressmaker dressmaker)
+        public async Task<Dressmaker> UpdateDressmakerAsync(int id, Dressmaker dressmaker)
         {
-            return _dressmakerRepository.UpdateDressmaker(id, dressmaker);
+            return await _dressmakerRepository.UpdateDressmakerAsync(id, dressmaker);
         }
 
-        public Dressmaker UpdateDressmaker(int id, Experience value)
+        public async Task<Dressmaker> UpdateDressmakerAsync(int id, Experience value)
         {
-            return _dressmakerRepository.UpdateDressmaker(id, value);
+            return await _dressmakerRepository.UpdateDressmakerAsync(id, value);
         }
 
-        public Dressmaker UpdateDressmaker(int id, int status)
+        public async Task<Dressmaker> UpdateDressmakerAsync(int id, int status)
         {
-            return _dressmakerRepository.UpdateDressmaker(id,status);   
+            return await _dressmakerRepository.UpdateDressmakerAsync(id,status);   
         }
     }
 }

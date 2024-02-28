@@ -13,11 +13,11 @@ namespace Bridal.Core.Repositories
 
         Dressmaker GetById(int id);
 
-        Dressmaker AddDressmaker(Dressmaker dressmaker);
+        Task<Dressmaker> AddDressmakerAsync(Dressmaker dressmaker);
 
-        Dressmaker UpdateDressmaker(int id, Dressmaker dressmaker);
-        Dressmaker UpdateDressmaker(int id, Experience value);
-        Dressmaker UpdateDressmaker(int id, int status);
+        Task<Dressmaker> UpdateDressmakerAsync(int id, Dressmaker dressmaker);
+        Task<Dressmaker> UpdateDressmakerAsync(int id, Experience value);
+        Task<Dressmaker> UpdateDressmakerAsync(int id, int status);
 
 
     }

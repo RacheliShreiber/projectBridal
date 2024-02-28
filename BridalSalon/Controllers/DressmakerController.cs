@@ -1,4 +1,6 @@
-﻿using Bridal.Core.Entities;
+﻿using AutoMapper;
+using Bridal.Core.DTOs;
+using Bridal.Core.Entities;
 using Bridal.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics.Metrics;
@@ -12,17 +14,20 @@ namespace BridalSalon.Controllers
     public class DressmakerController : ControllerBase
     {
         private readonly IDressmakerService _dressmakerService;
+        private readonly IMapper _mapper;
         //private static int counter = 100;
         // GET: api/<DressmakerController>
 
-        public DressmakerController(IDressmakerService dressmakerService)
+        public DressmakerController(IDressmakerService dressmakerService,IMapper mapper)
         {
             _dressmakerService = dressmakerService;
+            _mapper = mapper;
         }
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_dressmakerService.GetDressmaker());
+            var list = _dressmakerService.GetDressmaker();
+            return Ok(_mapper.Map<IEnumerable<DressmakerDTO>>(list));
         }
 
         // GET api/<DressmakerController>/5
@@ -32,7 +37,7 @@ namespace BridalSalon.Controllers
             var dressmaker = _dressmakerService.GetById(id);
             if(dressmaker is null)
                 return NotFound();
-            return Ok(dressmaker);
+            return Ok(_mapper.Map<DressmakerDTO>(dressmaker));
         }
         //[HttpGet("{id}/bridals")]
         //public List<Bridal> Get(int id)
@@ -42,29 +47,29 @@ namespace BridalSalon.Controllers
 
         // POST api/<DressmakerController>
         [HttpPost]
-        public void Post([FromBody] Dressmaker value)
+        public async Task<IActionResult> Post([FromBody] Dressmaker value)
         {
             //value.Id = counter;
             //counter += 100;
             //value.status = 1;
-            _dressmakerService.AddDressmaker(value);
+            return Ok(_mapper.Map<DressmakerDTO>(await _dressmakerService.AddDressmakerAsync(value)));
         }
 
         // PUT api/<DressmakerController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Dressmaker value)
+        public async Task<IActionResult> Put(int id, [FromBody] Dressmaker value)
         {
-            _dressmakerService.UpdateDressmaker(id, value);
+            return Ok(_mapper.Map<DressmakerDTO>(await _dressmakerService.UpdateDressmakerAsync(id, value)));
         }
         [HttpPut("{id}/experience")]
-        public void Put(int id, [FromBody] Experience value)
+        public async Task<IActionResult> Put(int id, [FromBody] Experience value)
         {
-            _dressmakerService.UpdateDressmaker(id, value);
+            return Ok(_mapper.Map<DressmakerDTO>(await _dressmakerService.UpdateDressmakerAsync(id, value)));
         }
         [HttpPut("{id}/status")]
-        public void Put(int id,int status)
+        public async Task<IActionResult> Put(int id,int status)
         {
-            _dressmakerService.UpdateDressmaker(id, status);
+            return Ok(_mapper.Map<DressmakerDTO>(await _dressmakerService.UpdateDressmakerAsync(id, status)));
         }
 
         // DELETE api/<DressmakerController>/5

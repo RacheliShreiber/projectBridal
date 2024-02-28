@@ -16,10 +16,10 @@ namespace Bridal.Data.Repositories
             _context = context;
         }
 
-        public Dressmaker AddDressmaker(Dressmaker dressmaker)
+        public async Task<Dressmaker> AddDressmakerAsync(Dressmaker dressmaker)
         {
             _context.DressmakerList.Add(dressmaker);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return dressmaker;
         }
 
@@ -33,30 +33,30 @@ namespace Bridal.Data.Repositories
             return _context.DressmakerList.ToList();
         }
 
-        public Dressmaker UpdateDressmaker(int id, Dressmaker dressmaker)
+        public async Task<Dressmaker> UpdateDressmakerAsync(int id, Dressmaker dressmaker)
         {
             var updateDressmaker = _context.DressmakerList.Find(id);
             if (updateDressmaker != null)
                 updateDressmaker.Name = dressmaker.Name;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return updateDressmaker;
         }
 
-        public Dressmaker UpdateDressmaker(int id, Experience value)
+        public async Task<Dressmaker> UpdateDressmakerAsync(int id, Experience value)
         {
             var updateDressmaker = _context.DressmakerList.Find(id);
             if (updateDressmaker != null)
                 updateDressmaker.experience = value;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return updateDressmaker;
         }
 
-        public Dressmaker UpdateDressmaker(int id, int status)
+        public async Task<Dressmaker> UpdateDressmakerAsync(int id, int status)
         {
             var updateDressmaker = _context.DressmakerList.Find(id);
             if (updateDressmaker != null)
                 updateDressmaker.status = status;
-
+            await _context.SaveChangesAsync();
             return updateDressmaker;
         }
     }

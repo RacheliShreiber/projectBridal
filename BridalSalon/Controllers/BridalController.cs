@@ -1,4 +1,6 @@
-﻿using Bridal.Core.Entities;
+﻿using AutoMapper;
+using Bridal.Core.DTOs;
+using Bridal.Core.Entities;
 using Bridal.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,17 +14,21 @@ namespace BridalSalon.Controllers
     {
         //private
         private readonly IBridalService _bridalService;
+        private readonly IMapper _mapper;
 
-        public BridalController(IBridalService bridalService)
+        public BridalController(IBridalService bridalService,IMapper mapper)
         {
             _bridalService = bridalService;
+            _mapper = mapper;
         }
         // GET: api/<BridalController>
         [HttpGet]
         public IActionResult Get()
         {
+            var list = _bridalService.GetBridal();
+            var listDTO=_mapper.Map<IEnumerable<BridalDTO>>(list);
             // return bridals;
-            return Ok(_bridalService.GetBridal());
+            return Ok(listDTO);
         }
 
         // GET api/<BridalController>/5
@@ -32,39 +38,43 @@ namespace BridalSalon.Controllers
             var bridal = _bridalService.GetById(id);
             if(bridal is null)
                 return NotFound();
-            return Ok(bridal);
+            var bridalDTO = _mapper.Map<BridalDTO>(bridal);
+            return Ok(bridalDTO);
             //return bridals.Find(b=>b.Id==id);
         }
 
         // POST api/<BridalController>
         [HttpPost]
-        public void Post([FromBody] BridalClass value)
+        public async Task<IActionResult> Post([FromBody] BridalClass value)
         {
-            _bridalService.AddBridal(value);
+            return Ok(_mapper.Map<BridalDTO>(await _bridalService.AddBridalAsync(value)));
         }
 
         // PUT api/<BridalController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] BridalClass value)
+        public async Task<IActionResult> Put(int id, [FromBody] BridalClass value)
         {
-            _bridalService.UpdateBridal(id, value);
+            var bridal = await _bridalService.UpdateBridalAsync(id, value);
+            return Ok(_mapper.Map<BridalDTO>(bridal));
+            
         }
-        [HttpPut("{id}/dressmaker")]
-        public void Put(int id, [FromBody] Dressmaker value)
-        {
-            _bridalService.UpdateBridal(id, value);
-        }
+        //[HttpPut("{id}/dressmaker")]
+        //public void Put(int id, [FromBody] Dressmaker value)
+        //{
+        //    _bridalService.UpdateBridal(id, value);
+        //}
         [HttpPut("{id}/date")]
-        public void Put(int id, [FromBody] DateTime value)
+        public async Task<IActionResult> Put(int id, [FromBody] DateTime value)
         {
-            _bridalService.UpdateBridal(id, value);
+            var bridal =await _bridalService.UpdateBridalAsync(id, value);
+            return Ok(_mapper.Map<BridalDTO>(bridal));
         }
 
         // DELETE api/<BridalController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            _bridalService.DeleteBridal(id);
+           await _bridalService.DeleteBridalAsync(id);
         }
     }
 }

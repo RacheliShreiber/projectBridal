@@ -46,8 +46,6 @@ namespace Bridal.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DressmakerId");
-
                     b.ToTable("BridalList");
                 });
 
@@ -88,38 +86,35 @@ namespace Bridal.Data.Migrations
                     b.Property<DateTime>("DateQueue")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("DressmakerId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BridalId");
 
+                    b.HasIndex("DressmakerId");
+
                     b.ToTable("QueueBridalList");
                 });
 
-            modelBuilder.Entity("Bridal.Core.Entities.BridalClass", b =>
+            modelBuilder.Entity("Bridal.Core.Entities.QueueBridal", b =>
                 {
+                    b.HasOne("Bridal.Core.Entities.BridalClass", "Bridal")
+                        .WithMany()
+                        .HasForeignKey("BridalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Bridal.Core.Entities.Dressmaker", "Dressmaker")
                         .WithMany()
                         .HasForeignKey("DressmakerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Dressmaker");
-                });
-
-            modelBuilder.Entity("Bridal.Core.Entities.QueueBridal", b =>
-                {
-                    b.HasOne("Bridal.Core.Entities.BridalClass", "Bridal")
-                        .WithMany("Queues")
-                        .HasForeignKey("BridalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Bridal");
-                });
 
-            modelBuilder.Entity("Bridal.Core.Entities.BridalClass", b =>
-                {
-                    b.Navigation("Queues");
+                    b.Navigation("Dressmaker");
                 });
 #pragma warning restore 612, 618
         }

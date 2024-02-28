@@ -18,14 +18,14 @@ namespace Bridal.Service
             _queueBridalRepository = queueBridalRepository;
         }
 
-        public QueueBridal AddQueueBridal(QueueBridal queueBridal)
+        public async Task<QueueBridal> AddQueueBridalAsync(QueueBridal queueBridal)
         {
-            return _queueBridalRepository.AddQueueBridal(queueBridal);
+            return await _queueBridalRepository.AddQueueBridalAsync(queueBridal);
         }
 
-        public void DeleteQueueBridal(int id)
+        public async Task DeleteQueueBridalAsync(int id)
         {
-            _queueBridalRepository.DeleteQueueBridal(id);
+            await _queueBridalRepository.DeleteQueueBridalAsync(id);
         }
 
         public QueueBridal GetById(int id)
@@ -38,14 +38,14 @@ namespace Bridal.Service
             return _queueBridalRepository.GetQueueBridal();
         }
 
-        public QueueBridal UpdateQueueBridal(int id, BridalClass bridal)
+        public async Task<QueueBridal> UpdateQueueBridalAsync(int id, BridalClass bridal)
         {
-            return _queueBridalRepository.UpdateQueueBridal(id, bridal);
+            return await _queueBridalRepository.UpdateQueueBridalAsync(id, bridal);
         }
 
-        public QueueBridal UpdateQueueBridal(int id, DateTime value)
+        public async Task<QueueBridal> UpdateQueueBridalAsync(int id, DateTime value)
         {
-            return _queueBridalRepository.UpdateQueueBridal(id, value);
+            return await _queueBridalRepository.UpdateQueueBridalAsync(id, value);
         }
     }
 }

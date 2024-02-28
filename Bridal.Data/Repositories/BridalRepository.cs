@@ -17,24 +17,24 @@ namespace Bridal.Data.Repositories
             _context = context;
         }
 
-        public BridalClass AddBridal(BridalClass bridal)
+        public async Task<BridalClass> AddBridalAsync(BridalClass bridal)
         {
             _context.BridalList.Add(bridal);
-            _context.SaveChanges(); 
+            await _context.SaveChangesAsync();
             return bridal;
         }
 
-        public void DeleteBridal(int id)
+        public async Task DeleteBridalAsync(int id)
         {
             _context.BridalList.Remove(_context.BridalList.Find(id));
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public IEnumerable<BridalClass> GetBridal()
         {
-            var a= _context.BridalList.Include(b => b.Queues);
-            //return _context.BridalList.Include(b => b.Queues);
-            return a.Include(b => b.Dressmaker);
+            //var a= _context.BridalList.Include(b => b.Queues);
+            return _context.BridalList;
+            //return a.Include(b => b.Dressmaker);
         }
 
         public BridalClass GetById(int id)
@@ -42,22 +42,22 @@ namespace Bridal.Data.Repositories
             return _context.BridalList.Find(id);
         }
 
-        public BridalClass UpdateBridal(int id, BridalClass bridal)
+        public async Task<BridalClass> UpdateBridalAsync(int id, BridalClass bridal)
         {
             var updateBridal = _context.BridalList.Find(id);
             if (updateBridal != null)
             {
                 updateBridal.Name = bridal.Name;
                 updateBridal.Phone = bridal.Phone;
-                updateBridal.Dressmaker=bridal.Dressmaker;
+                //updateBridal.Dressmaker=bridal.Dressmaker;
                 updateBridal.DateWedding = bridal.DateWedding;
                 return updateBridal;
             }
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return null;
         }
 
-        public BridalClass UpdateBridal(int id, DateTime value)
+        public async Task<BridalClass> UpdateBridalAsync(int id, DateTime value)
         {
             var updateBridal = _context.BridalList.Find(id);
             if (updateBridal != null)
@@ -65,20 +65,20 @@ namespace Bridal.Data.Repositories
                 updateBridal.DateWedding = value;
                 return updateBridal;
             }
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return null;
         }
 
-        public BridalClass UpdateBridal(int id, Dressmaker value)
-        {
-            var updateBridal = _context.BridalList.Find(id);
-            if (updateBridal != null)
-            {
-                updateBridal.Dressmaker = value;
-                return updateBridal;
-            }
-            _context.SaveChanges();
-            return null;
-        }
+        //public BridalClass UpdateBridal(int id, Dressmaker value)
+        //{
+        //    var updateBridal = _context.BridalList.Find(id);
+        //    if (updateBridal != null)
+        //    {
+        //        updateBridal.Dressmaker = value;
+        //        return updateBridal;
+        //    }
+        //    _context.SaveChanges();
+        //    return null;
+        //}
     }
 }

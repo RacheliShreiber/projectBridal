@@ -1,3 +1,4 @@
+using Bridal.Core;
 using Bridal.Core.Repositories;
 using Bridal.Core.Services;
 using Bridal.Data;
@@ -27,7 +28,7 @@ builder.Services.AddScoped<IQueueBridalRepository, QueueBridalRepository>();
 builder.Services.AddScoped<IQueueBridalService, QueueBridalService>();
 
 builder.Services.AddDbContext<DataContext>();
-
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

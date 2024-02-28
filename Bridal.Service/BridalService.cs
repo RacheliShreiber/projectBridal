@@ -18,14 +18,14 @@ namespace Bridal.Service
             _bridalRepository = bridalRepository;
         }
 
-        public BridalClass AddBridal(BridalClass bridal)
+        public async Task<BridalClass> AddBridalAsync(BridalClass bridal)
         {
-            return _bridalRepository.AddBridal(bridal);
+            return await _bridalRepository.AddBridalAsync(bridal);
         }
 
-        public void DeleteBridal(int id)
+        public async Task DeleteBridalAsync(int id)
         {
-            _bridalRepository.DeleteBridal(id);
+            await _bridalRepository.DeleteBridalAsync(id);
         }
 
         public IEnumerable<BridalClass> GetBridal()
@@ -38,19 +38,19 @@ namespace Bridal.Service
             return _bridalRepository.GetById(id);
         }
 
-        public BridalClass UpdateBridal(int id, BridalClass bridal)
+        public async Task<BridalClass> UpdateBridalAsync(int id, BridalClass bridal)
         {
-            return _bridalRepository.UpdateBridal(id, bridal);
+            return await _bridalRepository.UpdateBridalAsync(id, bridal);
         }
 
-        public BridalClass UpdateBridal(int id, DateTime value)
+        public async Task<BridalClass> UpdateBridalAsync(int id, DateTime value)
         {
-            return _bridalRepository.UpdateBridal(id, value);
+            return await _bridalRepository.UpdateBridalAsync(id, value);
         }
 
-        public BridalClass UpdateBridal(int id, Dressmaker value)
-        {
-            return _bridalRepository.UpdateBridal(id, value);
-        }
+        //public BridalClass UpdateBridal(int id, Dressmaker value)
+        //{
+        //    return _bridalRepository.UpdateBridal(id, value);
+        //}
     }
 }

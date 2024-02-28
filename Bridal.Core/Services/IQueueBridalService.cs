@@ -13,12 +13,12 @@ namespace Bridal.Core.Services
 
         QueueBridal GetById(int id);
 
-        QueueBridal AddQueueBridal(QueueBridal queueBridal);
+        Task<QueueBridal> AddQueueBridalAsync(QueueBridal queueBridal);
 
-        QueueBridal UpdateQueueBridal(int id, BridalClass bridal);
-        QueueBridal UpdateQueueBridal(int id, DateTime value);
+        Task<QueueBridal> UpdateQueueBridalAsync(int id, BridalClass bridal);
+        Task<QueueBridal> UpdateQueueBridalAsync(int id, DateTime value);
 
 
-        void DeleteQueueBridal(int id);
+        Task DeleteQueueBridalAsync(int id);
     }
 }

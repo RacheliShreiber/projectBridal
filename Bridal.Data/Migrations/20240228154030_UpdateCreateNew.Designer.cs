@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bridal.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240106235712_createBridalDB")]
-    partial class createBridalDB
+    [Migration("20240228154030_UpdateCreateNew")]
+    partial class UpdateCreateNew
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,12 +43,7 @@ namespace Bridal.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("dressmakerId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("dressmakerId");
 
                     b.ToTable("BridalList");
                 });
@@ -84,39 +79,41 @@ namespace Bridal.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("BridalId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DateQueue")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("bridalId")
+                    b.Property<int>("DressmakerId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("bridalId");
+                    b.HasIndex("BridalId");
+
+                    b.HasIndex("DressmakerId");
 
                     b.ToTable("QueueBridalList");
                 });
 
-            modelBuilder.Entity("Bridal.Core.Entities.BridalClass", b =>
-                {
-                    b.HasOne("Bridal.Core.Entities.Dressmaker", "dressmaker")
-                        .WithMany()
-                        .HasForeignKey("dressmakerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("dressmaker");
-                });
-
             modelBuilder.Entity("Bridal.Core.Entities.QueueBridal", b =>
                 {
-                    b.HasOne("Bridal.Core.Entities.BridalClass", "bridal")
+                    b.HasOne("Bridal.Core.Entities.BridalClass", "Bridal")
                         .WithMany()
-                        .HasForeignKey("bridalId")
+                        .HasForeignKey("BridalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("bridal");
+                    b.HasOne("Bridal.Core.Entities.Dressmaker", "Dressmaker")
+                        .WithMany()
+                        .HasForeignKey("DressmakerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Bridal");
+
+                    b.Navigation("Dressmaker");
                 });
 #pragma warning restore 612, 618
         }
