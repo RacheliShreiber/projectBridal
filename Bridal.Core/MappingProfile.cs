@@ -16,10 +16,6 @@ namespace Bridal.Core
             CreateMap<BridalClass,BridalDTO>().ReverseMap();
             CreateMap<Dressmaker,DressmakerDTO>().ReverseMap();
             CreateMap<QueueBridal,QueueDTO>().ReverseMap();
-
-            //CreateMap<BridalPostModel,BridalClass >().ReverseMap();
-            //CreateMap<Dressmaker, DressmakerDTO>().ReverseMap();
-            //CreateMap<QueueBridal, QueueDTO>().ReverseMap();
         }
     }
 }

@@ -9,16 +9,11 @@ namespace Bridal.Core.Repositories
 {
     public interface IDressmakerRepository
     {
-        List<Dressmaker> GetDressmaker();
-
-        Dressmaker GetById(int id);
-
+        Task<List<Dressmaker>> GetDressmakerAsync();
+        Task<Dressmaker> GetByIdAsync(int id);
         Task<Dressmaker> AddDressmakerAsync(Dressmaker dressmaker);
-
         Task<Dressmaker> UpdateDressmakerAsync(int id, Dressmaker dressmaker);
         Task<Dressmaker> UpdateDressmakerAsync(int id, Experience value);
         Task<Dressmaker> UpdateDressmakerAsync(int id, int status);
-
-
     }
 }

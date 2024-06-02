@@ -4,6 +4,7 @@ using Bridal.Core.Services;
 using Bridal.Data;
 using Bridal.Data.Repositories;
 using Bridal.Service;
+using BridalSalon;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,7 @@ builder.Services.AddScoped<IQueueBridalService, QueueBridalService>();
 
 builder.Services.AddDbContext<DataContext>();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddAutoMapper(typeof(Mapping));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -37,10 +39,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-Console.WriteLine("hello");
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<ShabbatMiddleware>();
 
 app.MapControllers();
 

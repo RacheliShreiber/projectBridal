@@ -13,9 +13,5 @@ namespace Bridal.Core.Entities
         public string Phone { get; set; }
         public DateTime DateWedding { get; set; }
         public int DressmakerId { get; set; }
-        //public Dressmaker Dressmaker { get; set; }
-        //public int MyProperty { get; set; }
-        // public List<QueueBridal> Queues { get; set; }
-
     }
 }

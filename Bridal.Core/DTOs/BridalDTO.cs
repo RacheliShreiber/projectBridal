@@ -8,9 +8,9 @@ namespace Bridal.Core.DTOs
 {
     public class BridalDTO
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
         public DateTime DateWedding { get; set; }
-        //public int DressmakerId { get; set; }
     }
 }

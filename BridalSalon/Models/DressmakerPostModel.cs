@@ -6,7 +6,6 @@ namespace BridalSalon.Models
     {
         public string Name { get; set; }
         public int status { get; set; }
-
         public Experience experience { get; set; }
     }
 }

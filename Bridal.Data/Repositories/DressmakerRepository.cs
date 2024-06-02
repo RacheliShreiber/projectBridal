@@ -1,5 +1,6 @@
 ﻿using Bridal.Core.Entities;
 using Bridal.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,24 +16,20 @@ namespace Bridal.Data.Repositories
         {
             _context = context;
         }
-
         public async Task<Dressmaker> AddDressmakerAsync(Dressmaker dressmaker)
         {
             _context.DressmakerList.Add(dressmaker);
             await _context.SaveChangesAsync();
             return dressmaker;
         }
-
-        public Dressmaker GetById(int id)
+        public async Task<Dressmaker> GetByIdAsync(int id)
         {
-            return _context.DressmakerList.Find(id);
+            return await _context.DressmakerList.FindAsync(id);
         }
-
-        public List<Dressmaker> GetDressmaker()
+        public async Task<List<Dressmaker>> GetDressmakerAsync()
         {
-            return _context.DressmakerList.ToList();
+            return await _context.DressmakerList.ToListAsync();
         }
-
         public async Task<Dressmaker> UpdateDressmakerAsync(int id, Dressmaker dressmaker)
         {
             var updateDressmaker = _context.DressmakerList.Find(id);
@@ -41,7 +38,6 @@ namespace Bridal.Data.Repositories
             await _context.SaveChangesAsync();
             return updateDressmaker;
         }
-
         public async Task<Dressmaker> UpdateDressmakerAsync(int id, Experience value)
         {
             var updateDressmaker = _context.DressmakerList.Find(id);
@@ -50,7 +46,6 @@ namespace Bridal.Data.Repositories
             await _context.SaveChangesAsync();
             return updateDressmaker;
         }
-
         public async Task<Dressmaker> UpdateDressmakerAsync(int id, int status)
         {
             var updateDressmaker = _context.DressmakerList.Find(id);

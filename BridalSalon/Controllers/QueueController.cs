@@ -3,6 +3,7 @@ using Bridal.Core.DTOs;
 using Bridal.Core.Entities;
 using Bridal.Core.Services;
 using Bridal.Service;
+using BridalSalon.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
 
@@ -23,51 +24,43 @@ namespace BridalSalon.Controllers
             _mapper = mapper;
         }
 
-
-        //private static int counter = 1;
         // GET: api/<QueueController>
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            var list = _queueBridalService.GetQueueBridal();
+            var list =await _queueBridalService.GetQueueBridalAsync();
             return Ok(_mapper.Map<IEnumerable<QueueDTO>>(list));
         }
 
         // GET api/<QueueController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            var queue = _queueBridalService.GetById(id);
+            var queue =await _queueBridalService.GetByIdAsync(id);
             if (queue is null)
                 return NotFound();
             return Ok(_mapper.Map<QueueDTO>(queue));
         }
-        //[HttpGet("{id}/date")]
-        //public QueueBridal Get(int id,DateTime date)
-        //{
-        //    return queues.Find(q => q.Id == id);
-        //}
-
+        
         // POST api/<QueueController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] QueueBridal value)
+        public async Task<IActionResult> Post([FromBody] QueuePostModel value)
         {
-            //value.Id = ++counter;
-            return Ok(_mapper.Map<QueueDTO>(await _queueBridalService.AddQueueBridalAsync(value)));
-            
+            var queue= _mapper.Map <QueueBridal>(value);
+            return Ok(_mapper.Map<QueueDTO>(await _queueBridalService.AddQueueBridalAsync(queue)));           
         }
 
         // PUT api/<QueueController>/5
         [HttpPut("{id}/date")]
         public async Task<IActionResult> Put(int id, [FromBody] DateTime value)
         {
-            return Ok(_mapper.Map<QueueDTO>(await _queueBridalService.UpdateQueueBridalAsync(id, value)));
-           
+            return Ok(_mapper.Map<QueueDTO>(await _queueBridalService.UpdateQueueBridalAsync(id, value)));          
         }
         [HttpPut("{id}/bridal")]
-        public async Task<IActionResult> Put(int id, [FromBody] BridalClass value)
+        public async Task<IActionResult> Put(int id, [FromBody] BridalPostModel value)
         {
-            return Ok(_mapper.Map<QueueDTO>(await _queueBridalService.UpdateQueueBridalAsync(id, value)));
+            var bridal = _mapper.Map<BridalClass>(value);
+            return Ok(_mapper.Map<QueueDTO>(await _queueBridalService.UpdateQueueBridalAsync(id, bridal)));
         }
 
         // DELETE api/<QueueController>/5
